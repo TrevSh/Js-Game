@@ -33,7 +33,7 @@ update(state){
     
 startBehavior(state, behavior){
     //Setting character direction
-    this.direction = state.arrow;
+    this.direction = behavior.direction;
     if(behavior.type === "walk"){
 
         //Stop if space is not free
@@ -44,6 +44,15 @@ startBehavior(state, behavior){
     //Ready to walk!
     state.map.moveWall(this.x, this.y, this.direction);
     this.movingProgressRemaining = 16;
+    this.updateSprite(state);
+        }
+
+    if (behavior.type === "stand"){
+        setTimeout(()=>{
+            utils.emitEvent("PersonStandComplete", { 
+                whoId: this.id
+            }) 
+        }, behavior.time)
         }
     }
 
