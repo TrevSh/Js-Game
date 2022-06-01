@@ -20,7 +20,7 @@ update(state){
         //More cases for starting to walk go here
         //  
         //Case: Keyboard ready and have arrow pressed
-        if (this.isPlayerControlled&& state.arrow){
+        if (!state.map.isCutscenePlaying &&this.isPlayerControlled&& state.arrow){
             this.startBehavior(state,{
                 type: "walk",
                 direction: state.arrow
@@ -38,6 +38,10 @@ startBehavior(state, behavior){
 
         //Stop if space is not free
      if (state.map.isSpaceTaken(this.x, this.y, this.direction)){
+
+         behavior.retry && setTimeout(()=> {
+            this.startBehavior(state, behavior)
+         },10)
         return;
     }
 
