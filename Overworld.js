@@ -48,11 +48,14 @@ class Overworld {
     init(){
         this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
         this.map.mountObjects();
+
         this.directionInput = new DirectionInput();
         this.directionInput.init();
+
         this.startGameLoop();
 
         this.map.startCutscene([
+
             {who: "hero", type: "walk", direction: "down"},
             {who: "hero", type: "walk", direction: "down"},
             {who: "npcA", type: "walk", direction: "left"},
